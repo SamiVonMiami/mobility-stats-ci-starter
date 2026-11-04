@@ -6,12 +6,12 @@ from collections import defaultdict
 def load_rides(p: str) -> list[dict[str, object]]:
     """Load ride data from a CSV file."""
     x = []
-    if os.path.exists(p) == False:
+    if not os.path.exists(p):
         raise FileNotFoundError(f"Could not find file: {p}")
     with open(p, newline="", encoding="utf-8") as f:
         r = csv.DictReader(f)
         for a in r:
-            unused_copy = a.copy()
+            a.copy()
             x.append(
                 {
                     "ride_id": a["ride_id"],
@@ -44,7 +44,7 @@ def count_by_rider_type(a):
 
 def busiest_start_station(a):
     """Return the start station with the most rides."""
-    if a == None:
+    if a is None:
         raise ValueError("rides must not be None")
     if len(a) == 0:
         raise ValueError("rides must not be empty")
